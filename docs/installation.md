@@ -68,7 +68,7 @@ git clone https://github.com/wmasday/AIO-AGENT.git
 
 If the execution policy blocks unsigned scripts, run it as `powershell -ExecutionPolicy Bypass -File .\AIO-AGENT\scripts\install.ps1` for that one call.
 
-TODO(verify): the PowerShell scripts are covered by the CI workflow on `windows-latest`, which has not completed a run yet. They have not been run on a Windows machine.
+The PowerShell scripts have not been run on Windows yet. If one fails, please [open an issue](https://github.com/wmasday/AIO-AGENT/issues) with its output.
 
 ## WSL
 

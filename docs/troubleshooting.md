@@ -29,7 +29,7 @@ Neither has a user-level rules file the installer can write. The skills still lo
 
 ## Cursor lists a skill twice
 
-Cursor also reads `~/.claude/skills/` and `~/.agents/skills/`, where the Claude Code and Codex adapters install the same skills. TODO(verify): whether Cursor deduplicates by name.
+Cursor also reads `~/.claude/skills/` and `~/.agents/skills/`, where the Claude Code and Codex adapters install the same skills. The copies are identical, so either entry works. To keep one copy, install only for Cursor: `npx aio-agent@latest install --only cursor`.
 
 ## Codex ignores the rules
 

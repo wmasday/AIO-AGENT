@@ -39,7 +39,7 @@ Source: [AGENTS.md guide](https://developers.openai.com/codex/guides/agents-md),
 Source: [Rules](https://cursor.com/docs/rules), [Skills](https://cursor.com/docs/skills), [MCP](https://cursor.com/docs/mcp).
 
 - **Rules:** user rules are edited in the app under **Customize → Rules**. There is no documented file, so the installer cannot write them. The router reaches Cursor through skill descriptions instead; to add the router as a user rule, paste `core/rules/router.md` into that screen.
-- **Skills:** native. Cursor reads `~/.cursor/skills/`, `~/.agents/skills/`, and, for compatibility, `~/.claude/skills/` and `~/.codex/skills/`. With Claude Code or Codex also installed, Cursor sees the same skill in more than one folder. TODO(verify): whether Cursor shows duplicates or deduplicates by name.
+- **Skills:** native. Cursor reads `~/.cursor/skills/`, `~/.agents/skills/`, and, for compatibility, `~/.claude/skills/` and `~/.codex/skills/`. With Claude Code or Codex also installed, Cursor finds the same skill in more than one folder. Cursor's documentation does not say how it resolves duplicate names; the copies are identical, so whichever it loads behaves the same.
 - **MCP:** `~/.cursor/mcp.json`, `mcpServers` map. Remote servers take `url` and `headers`; values support `${env:NAME}` interpolation.
 
 ## Google Antigravity
@@ -63,7 +63,7 @@ Source: [Agent Skills](https://moonshotai.github.io/kimi-cli/en/customization/sk
 Source: Pi [Configuration](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/configuration.md), [Skills](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/skills.md), [MCP](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/mcp.md). Oh My Pi [Context files](https://github.com/can1357/oh-my-pi/blob/main/docs/context-files.md), [Skills](https://github.com/can1357/oh-my-pi/blob/main/docs/skills.md), [MCP config](https://github.com/can1357/oh-my-pi/blob/main/docs/mcp-config.md).
 
 - **Pi:** user configuration lives in `~/.pi/agent` (`PI_CODING_AGENT_DIR` moves it). Context files load from that directory, so `~/.pi/agent/AGENTS.md` is global. Skills load from `~/.agents/skills/`. MCP servers load from `~/.pi/agent/mcp.json`; `headers` values expand `${VAR}`.
-- **Oh My Pi** (`omp`), a Pi fork: user context in `~/.omp/agent/AGENTS.md`, skills from `~/.agents/skills/` (on by default), MCP in `~/.omp/agent/mcp.json`. It also reads other agents' files, including `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`, and drops a same-name skill whose body is identical. TODO(verify): whether `headers` in `mcp.json` expand `${VAR}`; until then AIO-AGENT adds no keyed servers for Oh My Pi.
+- **Oh My Pi** (`omp`), a Pi fork: user context in `~/.omp/agent/AGENTS.md`, skills from `~/.agents/skills/` (on by default), MCP in `~/.omp/agent/mcp.json`. It also reads other agents' files, including `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`, and drops a same-name skill whose body is identical. `url` and `headers` values expand `${VAR}`.
 
 The `pi` adapter configures Pi and the `omp` adapter configures Oh My Pi. Oh My Pi also reads `~/.codex/AGENTS.md`, so with Codex installed too it sees the router twice.
 
@@ -81,4 +81,6 @@ The `agents-md` adapter covers OpenCode and any other agent that reads `~/.agent
 
 - **AutoClaw** (Zhipu desktop app): no public documentation of a global rules, skills or MCP location. Files inside the app bundle refer to `~/.openclaw-autoclaw/skills/`, which does not exist on the test machine. Per the project rule against guessing paths, there is no adapter.
 - **Gemini CLI:** documents `~/.gemini/GEMINI.md`, `~/.gemini/skills/` and `~/.gemini/settings.json`. Antigravity also reads `~/.gemini/GEMINI.md`, so writing the router there would load it twice for Antigravity users. Not supported in this version.
-- **Windsurf, Cline, GitHub Copilot:** not researched against first-party documentation in this version. Any of them that reads `~/.agents/skills/` gets the skills from the `agents-md` adapter. TODO(verify).
+- **GitHub Copilot:** personal skills load from `~/.copilot/skills` or `~/.agents/skills` ([docs](https://docs.github.com/en/copilot/concepts/customizations/agent-skills)), so the `agents-md` adapter gives Copilot the 20 skills. Rules and MCP are not configured.
+- **Cline:** global skills load from `~/.cline/skills/` ([docs](https://docs.cline.bot/features/skills)), which no adapter writes. Not supported in this version.
+- **Windsurf:** its skills documentation now redirects to Devin's, which documents `~/.agents/skills/` for Devin Local only. No documented global path for Windsurf itself, so not supported in this version.
