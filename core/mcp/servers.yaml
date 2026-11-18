@@ -1,0 +1,34 @@
+# MCP servers that AIO-AGENT adds to each agent's global configuration.
+#
+# The installer reads a fixed subset of YAML: two-space indentation, one
+# "key: value" per line, no lists, no quoting rules beyond plain strings.
+# Keys:
+#   transport  http | stdio
+#   url        endpoint for http servers
+#   command    executable for stdio servers
+#   args       space-separated arguments for stdio servers
+#   key_env    environment variable that holds the API key (never the key itself)
+#   key_header header that carries the key
+#   key_prefix text placed before the key in the header value
+#   requires_key  true: skip the server when key_env is unset at install time
+#                 false: add it without auth when key_env is unset
+
+servers:
+  context7:
+    transport: http
+    url: https://mcp.context7.com/mcp
+    key_env: CONTEXT7_API_KEY
+    key_header: Authorization
+    key_prefix: Bearer
+    requires_key: false
+  magic:
+    transport: http
+    url: https://21st.dev/api/mcp
+    key_env: API_KEY_21ST
+    key_header: x-api-key
+    key_prefix:
+    requires_key: true
+  chrome-devtools:
+    transport: stdio
+    command: npx
+    args: -y chrome-devtools-mcp@1.13.0 --no-usage-statistics
