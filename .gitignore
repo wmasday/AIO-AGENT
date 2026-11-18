@@ -23,3 +23,6 @@ build/
 
 # npm pack output
 *.tgz
+
+# Demo session logs and work copies
+examples/recording/sessions/

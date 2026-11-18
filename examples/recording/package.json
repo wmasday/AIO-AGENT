@@ -1,0 +1,9 @@
+{
+  "name": "aio-agent-demo-recording",
+  "private": true,
+  "description": "Tools that record the AIO-AGENT demo clips in docs/media.",
+  "type": "module",
+  "devDependencies": {
+    "playwright-core": "1.65.1"
+  }
+}
