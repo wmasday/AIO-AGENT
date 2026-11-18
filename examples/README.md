@@ -36,3 +36,13 @@ It binds to `127.0.0.1` and must never be exposed. Use it only for the security 
 cd examples/vulnerable
 npm start        # http://127.0.0.1:4000
 ```
+
+## Recording
+
+The clips in [docs/media](../docs/media/) are made with the scripts in [recording/](recording/):
+
+- `run.sh` runs one real `claude -p` turn against a fresh copy of a sample and saves the stream-json log to `recording/sessions/` (not committed).
+- `record.sh` replays a saved log at a fixed pace and renders it with [VHS](https://github.com/charmbracelet/vhs) to MP4 and GIF.
+- `browser.mjs` loads pages in the system Chrome through `playwright-core`, moves focus through the form, and renders the clip with ffmpeg.
+
+They need Claude Code, VHS, ffmpeg, Google Chrome and `npm install` in `recording/`. Set `DEMO_WORK` to a scratch directory outside the repository.

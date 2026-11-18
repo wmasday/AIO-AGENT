@@ -2,7 +2,7 @@
 
 AIO-AGENT installs 20 skills. Each has one job. The router ([core/rules/router.md](../core/rules/router.md)) loads a skill when its trigger matches; you can also call any skill by name, for example `/aio-tdd` in Claude Code or Cursor.
 
-Source numbers refer to [SOURCES.md](../SOURCES.md).
+Source numbers refer to [SOURCES.md](../SOURCES.md). To see each skill run against a sample project, with the exact prompt and result, read [demos.md](demos.md); the samples are in [examples/](../examples/README.md).
 
 ## Workflow
 

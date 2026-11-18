@@ -69,7 +69,7 @@ The installer configures only the agents it finds. Run it again at any time; a s
 | `aio-skill-check` | You want to install a third-party skill |
 | `aio-terse` | You type `/terse` |
 
-Agents load these on their own when the trigger matches. You can also call one by name, for example `/aio-tdd`. Details and sources: [docs/skills.md](docs/skills.md).
+Agents load these on their own when the trigger matches. You can also call one by name, for example `/aio-tdd`. Details and sources: [docs/skills.md](docs/skills.md). Recorded runs of each skill against the [sample apps](examples/README.md): [docs/demos.md](docs/demos.md).
 
 ## Modes
 
@@ -111,6 +111,7 @@ From a clone, use `scripts/update.sh` and `scripts/uninstall.sh` (`.ps1` on Wind
 - [Configuration](docs/configuration.md)
 - [Platforms](docs/platforms.md)
 - [Skills](docs/skills.md)
+- [Demos](docs/demos.md)
 - [Architecture](docs/architecture.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Updating](docs/updating.md)
