@@ -11,7 +11,34 @@
 
 Check with `node --version`.
 
-## macOS and Linux
+## Ways to install
+
+| Way | Command | Use when |
+| --- | --- | --- |
+| One-off with npx | `npx aio-agent@latest install` | You want nothing left on disk except the agent config |
+| Kept installed | `npm install -g aio-agent`, then `aio-agent install`; later `aio-agent update` | You run it often. TODO(verify): run once the package is on npm |
+| Clone and run | see below | You want to read or change the source first |
+
+`npx` downloads the package from the npm registry and runs its code with your user's permissions. Read [what the installer writes](#what-the-installer-writes) before running it.
+
+The npm package was tested from its tarball (`npx --yes --package ./aio-agent-0.1.0.tgz aio-agent install`). TODO(verify): `npx aio-agent@latest` itself, once published.
+
+## What the installer writes
+
+For each agent it detects, and nothing else:
+
+| What | Where |
+| --- | --- |
+| 20 skill folders, each with a `.aio-agent` marker file | The agent's user skills folder, see [platforms.md](platforms.md) |
+| The router, as its own file | `~/.claude/rules/aio-agent.md`, `~/.gemini/config/rules/aio-agent.md` |
+| The router, as a marked block appended to your file | `~/.codex/AGENTS.md`, `~/.pi/agent/AGENTS.md`, `~/.omp/agent/AGENTS.md`, `~/.config/opencode/AGENTS.md` |
+| MCP server entries | `claude mcp add-json --scope user`; `~/.codex/config.toml`; `~/.cursor/mcp.json`; `~/.gemini/config/mcp_config.json`; `~/.kimi/mcp.json`; `~/.pi/agent/mcp.json`; `~/.omp/agent/mcp.json` |
+| A backup of each existing file before its first change | `<file>.bak-<timestamp>`, next to the file |
+| The install record | `~/.aio-agent/state.json` |
+
+It never writes API key values, never changes an MCP server or skill folder you created, and never edits `CLAUDE.md` or `GEMINI.md`.
+
+## macOS and Linux (from a clone)
 
 ```sh
 git clone https://github.com/wmasday/AIO-AGENT.git
@@ -30,7 +57,7 @@ Claude Code
 
 Keep the cloned folder: `update.sh` and `uninstall.sh` live in it. Uninstall works from any copy, because it reads what was installed from `~/.aio-agent/state.json`.
 
-## Windows
+## Windows (from a clone)
 
 In PowerShell:
 

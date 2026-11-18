@@ -2,6 +2,16 @@
 
 ## Update
 
+With npx, rerun the latest version; only changed files are rewritten:
+
+```sh
+npx aio-agent@latest install
+```
+
+With a global install, `aio-agent update` runs `npm install --global aio-agent@latest` and then `aio-agent install`. TODO(verify): run once the package is on npm.
+
+From a clone:
+
 ```sh
 AIO-AGENT/scripts/update.sh
 ```
@@ -31,8 +41,10 @@ Check out the earlier tag and run the installer. It replaces the skill folders a
 ## Uninstall
 
 ```sh
-AIO-AGENT/scripts/uninstall.sh
+npx aio-agent@latest uninstall
 ```
+
+or, from a clone, `AIO-AGENT/scripts/uninstall.sh`. Both read the same record, so either removes an install made by the other.
 
 Uninstall reads `~/.aio-agent/state.json` and:
 

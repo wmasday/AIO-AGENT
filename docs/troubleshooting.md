@@ -38,3 +38,11 @@ Codex reads `~/.codex/AGENTS.override.md` instead of `AGENTS.md` when the overri
 ## `node --test tests/` fails with "Cannot find module"
 
 Node 22 treats a directory argument as a module path. Name the file: `node --test tests/roundtrip.test.mjs`.
+
+## `npx ./aio-agent-0.1.0.tgz` fails with "Permission denied"
+
+npx treats a bare path as a command. Name the package explicitly: `npx --yes --package ./aio-agent-0.1.0.tgz aio-agent --help`.
+
+## `doctor` under npx reported chrome-devtools as not reachable
+
+Fixed in 0.1.0. npx exports `npm_config_*` variables, and the nested `npx` that starts the server read `npm_config_package` and ran the wrong command. `doctor` now starts the server without those variables.

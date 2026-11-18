@@ -13,11 +13,20 @@ One set of skills, rules and MCP server definitions, installed once at user leve
 
 AIO-AGENT draws on 17 open-source agent skills and tools (workflow, TDD, debugging, frontend quality, security, terse output), merged into 20 skills with one job each, and installs them into Claude Code, Codex, Cursor, Antigravity, Kimi, Pi, Oh My Pi and OpenCode. An always-on router of under 100 lines decides when each skill loads, so skill bodies stay out of the context until they are needed.
 
+**Pre-release.** Tested end to end on macOS with Claude Code and Google Antigravity. Codex, Cursor, Kimi, Pi, Oh My Pi and OpenCode are tested at the config-file level only, because those agents were not available on the test machine. Linux and Windows have not been tested yet.
+
 ## Quick start
 
-Requires Git and Node.js 18 or newer (20.19 or newer for the Chrome DevTools MCP server).
+Requires Node.js 18 or newer (20.19 or newer for the Chrome DevTools MCP server).
 
-macOS and Linux:
+```sh
+npx aio-agent@latest install
+npx aio-agent@latest doctor
+```
+
+`npx` downloads and runs the package's code. The installer backs up every existing file before changing it; see [what it writes](docs/installation.md#what-the-installer-writes).
+
+From a clone instead, on macOS and Linux:
 
 ```sh
 git clone https://github.com/wmasday/AIO-AGENT.git
@@ -90,11 +99,11 @@ Safety rules hold in every mode. See [core/rules/precedence.md](core/rules/prece
 ## Update and uninstall
 
 ```sh
-AIO-AGENT/scripts/update.sh      # git pull, then reinstall
-AIO-AGENT/scripts/uninstall.sh   # remove everything and restore backed-up files
+npx aio-agent@latest install     # update: rerun the latest version
+npx aio-agent@latest uninstall   # remove everything and restore backed-up files
 ```
 
-Use the `.ps1` scripts on Windows. See [docs/updating.md](docs/updating.md).
+From a clone, use `scripts/update.sh` and `scripts/uninstall.sh` (`.ps1` on Windows). See [docs/updating.md](docs/updating.md).
 
 ## Documentation
 
