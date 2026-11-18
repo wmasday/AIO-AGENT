@@ -16,12 +16,12 @@ Check with `node --version`.
 | Way | Command | Use when |
 | --- | --- | --- |
 | One-off with npx | `npx aio-agent@latest install` | You want nothing left on disk except the agent config |
-| Kept installed | `npm install -g aio-agent`, then `aio-agent install`; later `aio-agent update` | You run it often. TODO(verify): run once the package is on npm |
+| Kept installed | `npm install -g aio-agent`, then `aio-agent install`; later `aio-agent update` | You run it often |
 | Clone and run | see below | You want to read or change the source first |
 
 `npx` downloads the package from the npm registry and runs its code with your user's permissions. Read [what the installer writes](#what-the-installer-writes) before running it.
 
-The npm package was tested from its tarball (`npx --yes --package ./aio-agent-0.1.0.tgz aio-agent install`). TODO(verify): `npx aio-agent@latest` itself, once published.
+The published 0.1.0 package was tested with `npx aio-agent@0.1.0` (install, doctor, uninstall) and with a global install followed by `aio-agent update`, in a scratch home directory on macOS.
 
 ## What the installer writes
 

@@ -8,7 +8,7 @@ With npx, rerun the latest version; only changed files are rewritten:
 npx aio-agent@latest install
 ```
 
-With a global install, `aio-agent update` runs `npm install --global aio-agent@latest` and then `aio-agent install`. TODO(verify): run once the package is on npm.
+With a global install, `aio-agent update` runs `npm install --global aio-agent@latest` and then `aio-agent install`.
 
 From a clone:
 
