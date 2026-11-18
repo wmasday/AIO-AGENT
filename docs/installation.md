@@ -21,7 +21,7 @@ Check with `node --version`.
 
 `npx` downloads the package from the npm registry and runs its code with your user's permissions. Read [what the installer writes](#what-the-installer-writes) before running it.
 
-The published 0.1.0 package was tested with `npx aio-agent@0.1.0` (install, doctor, uninstall) and with a global install followed by `aio-agent update`, in a scratch home directory on macOS.
+The published 0.1.1 package was tested with `npx aio-agent@0.1.1` (install, doctor, uninstall) and with a global install followed by `aio-agent update`, in a scratch home directory on macOS.
 
 ## What the installer writes
 
