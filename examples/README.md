@@ -39,7 +39,7 @@ npm start        # http://127.0.0.1:4000
 
 ## Recording
 
-The clips in [docs/media](../docs/media/) are made with the scripts in [recording/](recording/):
+The clips attached to the [v0.1.1 release](https://github.com/wmasday/AIO-AGENT/releases/tag/v0.1.1) are made with the scripts in [recording/](recording/). They render into `docs/media/`, which is not committed:
 
 - `run.sh` runs one real `claude -p` turn against a fresh copy of a sample and saves the stream-json log to `recording/sessions/` (not committed).
 - `record.sh` replays a saved log at a fixed pace and renders it with [VHS](https://github.com/charmbracelet/vhs) to MP4 and GIF.

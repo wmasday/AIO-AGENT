@@ -34,9 +34,9 @@ How the clips were made:
 
 ## Brainstorm, plan, execute
 
-![Brainstorm, plan and execute demo](media/brainstorm-plan-execute.gif)
+![Brainstorm, plan and execute demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/brainstorm-plan-execute.gif)
 
-[MP4](media/brainstorm-plan-execute.mp4)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/brainstorm-plan-execute.mp4)
 
 Prompts, two turns in `examples/app`:
 
@@ -52,9 +52,9 @@ Result: 15 of 15 tests pass. Starting the server and creating a branch were outs
 
 ## Test-driven fix (`aio-tdd`)
 
-![TDD demo](media/tdd.gif)
+![TDD demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/tdd.gif)
 
-[MP4](media/tdd.mp4)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/tdd.mp4)
 
 Prompt: `/aio-tdd Signup should accept an email with spaces around it, like ' ada@example.com ', and store it trimmed.`
 
@@ -64,9 +64,9 @@ Result: the new test passes. The skill was called by name. A first run with the 
 
 ## Debugging (`aio-debug`)
 
-![Debug demo](media/debug.gif)
+![Debug demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/debug.gif)
 
-[MP4](media/debug.mp4)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/debug.mp4)
 
 Prompt: `GET /api/products?page=1 returns Desk lamp and Monitor stand instead of the first two products. Find out why and fix it.`
 
@@ -76,9 +76,9 @@ Result: one-line fix to `(page - 1) * limit`; 4 of 4 tests pass. Its attempt to 
 
 ## Review, verify, lean
 
-![Review demo](media/review.gif)
+![Review demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/review.gif)
 
-[MP4](media/review.mp4)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/review.mp4)
 
 Prompt, run on the fix from the debugging demo: `Review the uncommitted change in this repository before I commit it. Is it correct, tested and as small as it can be?`
 
@@ -88,9 +88,9 @@ Result: approved the one-line change and flagged, as separate follow-up work, th
 
 ## Plain output and terse mode
 
-![Terse demo](media/terse.gif)
+![Terse demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/terse.gif)
 
-[MP4](media/terse.mp4)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/terse.mp4)
 
 Prompts, two separate sessions:
 
@@ -103,9 +103,9 @@ Result: 319 words in normal mode, 249 in terse mode, with the same facts. `aio-p
 
 ## Frontend design
 
-![Frontend design demo](media/frontend-design.gif)
+![Frontend design demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/frontend-design.gif)
 
-[MP4](media/frontend-design.mp4) · [agent session](media/frontend-design-session.mp4) · stills: [before](media/frontend-design-1.png), [after](media/frontend-design-2.png)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/frontend-design.mp4) · [agent session](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/frontend-design-session.mp4) · stills: [before](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/frontend-design-1.png), [after](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/frontend-design-2.png)
 
 Prompt: `Critique the sign-up page in public/index.html and fix what you find.`
 
@@ -115,9 +115,9 @@ Result: the browser clip shows the fields now labelled, the focus ring visible, 
 
 ## UI components (Magic MCP)
 
-![UI components demo](media/ui-components.gif)
+![UI components demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/ui-components.gif)
 
-[MP4](media/ui-components.mp4) · [agent session](media/ui-components-session.mp4) · stills: [before](media/ui-components-1.png), [after](media/ui-components-2.png)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/ui-components.mp4) · [agent session](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/ui-components-session.mp4) · stills: [before](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/ui-components-1.png), [after](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/ui-components-2.png)
 
 Prompt: `Add a pricing section for the Free and Team plans below the sign-up form in public/index.html. Use a ready-made component.`
 
@@ -127,9 +127,9 @@ Result: two plan cards with a "Recommended" badge below the form. The repository
 
 ## Browser debugging (Chrome DevTools MCP)
 
-![Browser debug demo](media/browser-debug.gif)
+![Browser debug demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/browser-debug.gif)
 
-[MP4](media/browser-debug.mp4)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/browser-debug.mp4)
 
 Prompt, with the sample running on `127.0.0.1:3000`: `The sign-up page at http://127.0.0.1:3000 never shows the signup count, and part of it loads slowly. Find out why in the browser.`
 
@@ -139,9 +139,9 @@ Result: found the `TypeError` from `getElementById('signupCount')` against `id="
 
 ## Library docs (Context7)
 
-![Library docs demo](media/library-docs.gif)
+![Library docs demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/library-docs.gif)
 
-[MP4](media/library-docs.mp4)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/library-docs.mp4)
 
 Prompt: `Is z.string().email() in lib/signup.js still the right way to validate an email with the Zod version this project uses? Update it if not.`
 
@@ -151,9 +151,9 @@ Result: changed the schema to `z.email()`; the signup tests pass.
 
 ## Security review
 
-![Security review demo](media/security-review.gif)
+![Security review demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/security-review.gif)
 
-[MP4](media/security-review.mp4)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/security-review.mp4)
 
 Prompt, in `examples/vulnerable`: `Review server.js for security vulnerabilities.`
 
@@ -163,9 +163,9 @@ Result: three findings with line numbers, exploit examples and fixes: SQL inject
 
 ## Pentest (gated)
 
-![Pentest demo](media/pentest.gif)
+![Pentest demo](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/pentest.gif)
 
-[MP4](media/pentest.mp4)
+[MP4](https://github.com/wmasday/AIO-AGENT/releases/download/v0.1.1/pentest.mp4)
 
 Prompts, three turns, with the vulnerable sample running on `127.0.0.1:4000`:
 

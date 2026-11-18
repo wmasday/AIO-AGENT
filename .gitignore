@@ -26,3 +26,6 @@ build/
 
 # Demo session logs and work copies
 examples/recording/sessions/
+
+# Demo media, published as release assets
+docs/media/
