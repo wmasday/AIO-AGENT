@@ -13,7 +13,7 @@ One set of skills, rules and MCP server definitions, installed once at user leve
 
 AIO-AGENT draws on 17 open-source agent skills and tools (workflow, TDD, debugging, frontend quality, security, terse output), merged into 20 skills with one job each, and installs them into Claude Code, Codex, Cursor, Antigravity, Kimi, Pi, Oh My Pi and OpenCode. An always-on router of under 100 lines decides when each skill loads, so skill bodies stay out of the context until they are needed.
 
-**Pre-release.** Tested end to end on macOS with Claude Code and Google Antigravity. Codex, Cursor, Kimi, Pi, Oh My Pi and OpenCode are tested at the config-file level only, because those agents were not available on the test machine. Linux and Windows have not been tested yet.
+**Pre-release.** Tested end to end on macOS with Claude Code and Google Antigravity. See [Known limitations](#known-limitations).
 
 ## Quick start
 
@@ -95,6 +95,14 @@ Safety rules hold in every mode. See [core/rules/precedence.md](core/rules/prece
 | OpenCode | yes | yes | no | Config files only, macOS; agent not run |
 
 "Config files only" means the installer, doctor and uninstaller were run against a scratch home directory and the files were checked against each vendor's documentation, but the agent itself was not available to confirm it loads them. Linux and Windows have not been tested yet. Paths and caveats per agent: [docs/platforms.md](docs/platforms.md).
+
+## Known limitations
+
+- There is no CI. The GitHub Actions workflow was removed on 2026-11-19; the checks listed in [CONTRIBUTING.md](CONTRIBUTING.md) are run locally before each release. Linux and Windows have not been tested.
+- Codex, Cursor, Kimi, Pi, Oh My Pi and OpenCode are tested at the config-file level only: the installer, doctor and uninstaller were run against a scratch home directory, but the agents themselves were not run.
+- Cursor's documentation does not say how it handles the same skill name in two folders. With Claude Code or Codex also installed, Cursor finds each skill twice.
+- Oh My Pi documents `${VAR}` expansion in MCP headers. AIO-AGENT relies on it for keyed servers, but it has not been tested with the agent.
+- The PowerShell scripts have not been run on Windows.
 
 ## Update and uninstall
 

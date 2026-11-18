@@ -84,3 +84,11 @@ The `agents-md` adapter covers OpenCode and any other agent that reads `~/.agent
 - **GitHub Copilot:** personal skills load from `~/.copilot/skills` or `~/.agents/skills` ([docs](https://docs.github.com/en/copilot/concepts/customizations/agent-skills)), so the `agents-md` adapter gives Copilot the 20 skills. Rules and MCP are not configured.
 - **Cline:** global skills load from `~/.cline/skills/` ([docs](https://docs.cline.bot/features/skills)), which no adapter writes. Not supported in this version.
 - **Windsurf:** its skills documentation now redirects to Devin's, which documents `~/.agents/skills/` for Devin Local only. No documented global path for Windsurf itself, so not supported in this version.
+
+## Known limitations
+
+- There is no CI. The GitHub Actions workflow was removed on 2026-11-19; the checks listed in [CONTRIBUTING.md](../CONTRIBUTING.md) are run locally before each release. Linux and Windows have not been tested.
+- Codex, Cursor, Kimi, Pi, Oh My Pi and OpenCode are tested at the config-file level only: the installer, doctor and uninstaller were run against a scratch home directory, but the agents themselves were not run.
+- Cursor's documentation does not say how it handles the same skill name in two folders. With Claude Code or Codex also installed, Cursor finds each skill twice.
+- Oh My Pi documents `${VAR}` expansion in MCP headers. AIO-AGENT relies on it for keyed servers, but it has not been tested with the agent.
+- The PowerShell scripts have not been run on Windows.

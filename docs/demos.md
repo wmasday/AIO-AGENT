@@ -4,10 +4,33 @@ Each clip below is a real Claude Code session run against the samples in [exampl
 
 How the clips were made:
 
-- **Terminal clips** replay the session log saved by `claude -p --output-format stream-json`. Tool calls, results and the agent's text appear in the order and wording of the log; only the time spent waiting on the model is removed. The last line of each turn shows the real agent time.
+- **Terminal clips** are not screen captures. They replay the session logs with waiting removed; the agent's output is unedited. Each log was saved by `claude -p --output-format stream-json`, and the last line of each turn shows the real agent time.
 - **Browser clips** load the sample page before and after the agent's change in Chrome and move keyboard focus through the form.
 - Each run had a fixed list of allowed tools. Commands outside it were denied, and the clips show those denials. A third-party skill plugin installed on the test machine (ponytail) was switched off so that only AIO-AGENT's skills could load.
 - The scripts are in [examples/recording/](../examples/recording/). Long tool output is cut to four lines.
+
+## Summary
+
+"Loaded" means the agent loaded the skill during the run. "Not loaded separately" means the run did not load that skill on its own, even where the agent did similar work.
+
+| Skill | Result | Runs |
+| --- | --- | --- |
+| `aio-brainstorm`, `aio-plan`, `aio-execute` | Loaded | 2 |
+| `aio-tdd` | Loaded when called by name; a first run phrased as a bug report loaded `aio-debug` | 2 |
+| `aio-debug` | Loaded | 1 |
+| `aio-review` | Loaded; it ran the tests and judged the size of the change | 1 |
+| `aio-verify`, `aio-lean` | Not loaded separately | – |
+| `aio-terse` | Loaded | 2 |
+| `aio-plain-output` | Not loaded separately | – |
+| `aio-frontend-design` | Loaded | 1 |
+| `aio-modern-web` | Not loaded separately | – |
+| `aio-ui-components` | Loaded | 1 |
+| `aio-browser-debug` | Loaded | 1 |
+| `aio-library-docs` | Loaded | 1 |
+| `aio-security-review` | Loaded | 1 |
+| `aio-pentest` | Loaded; gate, then `curl` to 127.0.0.1 only | 3 |
+
+16 agent runs in total. `aio-grill`, `aio-setup` and `aio-skill-check` were not recorded.
 
 ## Brainstorm, plan, execute
 
@@ -155,5 +178,7 @@ What the agent did:
 - Turn 1 asked whether the target is owned or authorized and not production, ran nothing, and refused to treat `localhost` as authorization.
 - Turn 2 did not start Shannon or Strix. Its `curl` calls were denied, because the allowed-tools patterns used for the run did not match the flags it used. It confirmed both flaws from the source instead and asked for approval.
 - Turn 3, with `curl` allowed, sent five requests. `name=x' OR '1'='1` returned all users, a `UNION SELECT` returned the hidden `role` column, and the `<script>` payload came back unescaped.
+
+Setup fault: the allowed-command patterns for turn 2 did not match the agent's `curl` flags, so turn 3 re-ran the probes with `curl` allowed. 3 runs, 1 of them a retry caused by the setup.
 
 What was run and what was not: only `curl` against `127.0.0.1:4000`, checked in the session log. **Shannon and Strix were not run**: they need Docker and their own model keys, which were not configured, and they were denied in the allowed-tools list.
