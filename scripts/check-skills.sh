@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Validate core/: skill frontmatter (Agent Skills spec limits), relative links,
 # obvious secrets, and that the router and the skill folders agree.
 # Usage: scripts/check-skills.sh   (exit 1 on any failure)
-set -eu
+set -euo pipefail
 
 root=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$root"
