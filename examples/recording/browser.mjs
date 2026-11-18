@@ -20,7 +20,7 @@ const stills = await browser.newContext({ viewport: size, deviceScaleFactor: 2 }
 for (const [i, spec] of pages.entries()) {
   const page = await stills.newPage();
   await page.goto(spec.slice(spec.indexOf('=') + 1), { waitUntil: 'networkidle' });
-  await page.screenshot({ path: join(media, `${demo}-${i + 1}.png`) });
+  await page.screenshot({ path: join(media, `${demo}-${i + 1}.png`), fullPage: true });
   await page.close();
 }
 await stills.close();
@@ -52,7 +52,7 @@ for (const spec of pages) {
     await page.keyboard.press('Tab');
     await page.waitForTimeout(700);
   }
-  await page.waitForTimeout(1200);
+  await page.waitForTimeout(2000);
 }
 await cdp.send('Page.stopScreencast');
 frames.push({ file: frames.at(-1).file, t: frames.at(-1).t + 1 });
@@ -63,6 +63,6 @@ await browser.close();
 const list = frames.slice(0, -1).map((f, i) => `file '${f.file}'\nduration ${(frames[i + 1].t - f.t).toFixed(3)}`);
 const src = join(videoDir, 'frames.txt');
 writeFileSync(src, `${list.join('\n')}\nfile '${frames.at(-1).file}'\n`);
-execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', src, '-r', '24', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-vf', 'scale=1280:-2', '-movflags', '+faststart', join(media, `${demo}.mp4`)]);
-execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', src, '-vf', 'fps=10,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse=dither=bayer:bayer_scale=4', join(media, `${demo}.gif`)]);
+execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', src, '-r', '24', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-vf', 'scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:color=white', '-movflags', '+faststart', join(media, `${demo}.mp4`)]);
+execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', src, '-vf', 'fps=8,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=64:stats_mode=diff[p];[b][p]paletteuse=dither=none:diff_mode=rectangle', join(media, `${demo}.gif`)]);
 console.log(`wrote ${demo}.mp4, ${demo}.gif and ${pages.length} still(s) to ${media}`);

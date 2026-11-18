@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Runs one real Claude Code turn for a demo and saves its stream-json log.
-# Usage: run.sh <demo> <sample: app|vulnerable> <turn> "<prompt>" [extra claude args...]
-# Turn 1 copies the sample into a fresh work directory; later turns continue that session.
+# Usage: run.sh <demo> <sample: app|vulnerable|path> <turn> "<prompt>" [extra claude args...]
+# Turn 1 copies the sample into a fresh work directory; later turns continue that session
+# unless FRESH=1. A path sample (an earlier demo's work directory) keeps its git history.
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -14,10 +15,15 @@ mkdir -p "$logs"
 
 if [ "$turn" = 1 ]; then
   [ -e "$work" ] && { echo "$work exists; remove it first" >&2; exit 1; }
-  cp -R "$here/../$sample" "$work"
-  git -C "$work" init -q
-  git -C "$work" add -A
-  git -C "$work" -c user.name=demo -c user.email=demo@example.invalid commit -qm "Sample as shipped"
+  [ -d "$sample" ] || sample="$here/../$sample"
+  cp -R "$sample" "$work"
+  if [ ! -d "$work/.git" ]; then
+    git -C "$work" init -q
+    git -C "$work" add -A
+    git -C "$work" -c user.name=demo -c user.email=demo@example.invalid commit -qm "Sample as shipped"
+  fi
+  continue_flag=()
+elif [ "${FRESH:-0}" = 1 ]; then
   continue_flag=()
 else
   continue_flag=(--continue)
@@ -25,7 +31,7 @@ fi
 
 cd "$work"
 # Plugins outside AIO-AGENT are switched off so the recording shows only its skills.
-claude -p "$prompt" "${continue_flag[@]}" \
+claude -p "$prompt" ${continue_flag[@]+"${continue_flag[@]}"} \
   --output-format stream-json --verbose \
   --settings '{"enabledPlugins":{"ponytail@ponytail":false}}' \
   "$@" < /dev/null > "$logs/$demo.$turn.jsonl"

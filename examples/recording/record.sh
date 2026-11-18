@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Renders saved demo sessions to docs/media/<demo>.mp4 and .gif with VHS.
-# Usage: record.sh <demo> <shown dir> <seconds per turn> "<prompt turn 1>" ["<prompt turn 2>" ...]
+# Usage: [OUT=<clip name>] record.sh <demo> <shown dir> <seconds per turn> "<prompt turn 1>" ["<prompt turn 2>" ...]
 # A prompt that starts with "--continue " is shown as a follow-up turn.
 set -euo pipefail
 
@@ -8,12 +8,13 @@ here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 demo="$1" shown="$2" seconds="$3"
 shift 3
 media="${MEDIA:-$here/../../docs/media}"
-tape="$here/sessions/$demo.tape"
+out="${OUT:-$demo}"
+tape="$here/sessions/$out.tape"
 mkdir -p "$media" "$here/sessions"
 
 {
   cat <<EOF
-Output "$media/$demo.mp4"
+Output "$here/sessions/$out.raw.mp4"
 Set Shell bash
 Set Width 1280
 Set Height 720
@@ -38,14 +39,16 @@ EOF
     # shellcheck disable=SC2016 # the backticks and $ are VHS syntax, not shell
     printf 'Type `%s`\nSleep 400ms\nEnter\nWait@%ss /\\$$/\nSleep 2500ms\n' "$shown_cmd" "$((seconds + 30))"
   done
-  printf 'Sleep 1500ms\n'
+  printf 'Sleep 5s\n'
 } > "$tape"
 
 DEMO_WORK="${DEMO_WORK:?set DEMO_WORK}" vhs "$tape"
 
-# GIF for the README: 960 px wide, 12 fps, palette tuned for text.
-ffmpeg -loglevel error -y -i "$media/$demo.mp4" \
-  -vf "fps=12,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=64:stats_mode=diff[p];[b][p]paletteuse=dither=none:diff_mode=rectangle" \
-  "$media/$demo.gif"
-wc -c "$media/$demo.mp4" "$media/$demo.gif"
-ffprobe -v error -show_entries format=duration -of csv=p=0 "$media/$demo.mp4"
+# Terminal text needs few colours and frames; these settings keep a 45 s clip near 4 MB as GIF.
+ffmpeg -loglevel error -y -i "$here/sessions/$out.raw.mp4" -c:v libx264 -crf 30 -preset slow -tune stillimage \
+  -pix_fmt yuv420p -movflags +faststart "$media/$out.mp4"
+ffmpeg -loglevel error -y -i "$media/$out.mp4" \
+  -vf "fps=6,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=16:stats_mode=diff[p];[b][p]paletteuse=dither=none:diff_mode=rectangle" \
+  "$media/$out.gif"
+wc -c "$media/$out.mp4" "$media/$out.gif"
+ffprobe -v error -show_entries format=duration -of csv=p=0 "$media/$out.mp4"

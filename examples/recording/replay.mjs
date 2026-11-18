@@ -3,7 +3,7 @@
 // The content is printed unedited; only the time spent waiting on the model is removed.
 // Usage: node replay.mjs <session.jsonl> [--seconds 30] [--root <dir shown as .>]
 import { readFileSync } from 'node:fs';
-import { homedir } from 'node:os';
+import { homedir, userInfo } from 'node:os';
 
 const args = process.argv.slice(2);
 const file = args[0];
@@ -23,7 +23,7 @@ const RESET = '\x1b[0m';
 const clean = (s) => {
   let out = String(s);
   if (root) out = out.split(`${root}/`).join('').split(root).join('.');
-  return out.split(homedir()).join('~');
+  return out.split(homedir()).join('~').split(userInfo().username).join('user');
 };
 
 function wrap(text, indent = '') {
@@ -99,7 +99,7 @@ for (const raw of readFileSync(file, 'utf8').split('\n')) {
 if (summary) steps.push([4, ''], [1, summary]);
 
 const totalWeight = steps.reduce((sum, [w]) => sum + w, 0);
-const unit = Math.min(60, (seconds * 1000) / Math.max(totalWeight, 1));
+const unit = Math.min(150, (seconds * 1000) / Math.max(totalWeight, 1));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 for (const [weight, line] of steps) {
   await sleep(weight * unit);
