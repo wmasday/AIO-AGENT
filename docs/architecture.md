@@ -101,3 +101,42 @@ All names carry the `aio-` prefix so they never collide with a user's own skills
 - Whether Oh My Pi expands `${VAR}` in MCP `headers`.
 - AutoClaw's configuration format. It has no public documentation.
 - Behaviour on platforms not installed on the test machine (see the test matrix in the README).
+
+## How the installer works
+
+`scripts/install.sh` and `scripts/install.ps1` check for Node.js and call `scripts/aio.mjs install`. Merging JSON and TOML safely needs a real parser, and the MCP servers already need Node.js, so the engine is one dependency-free Node script instead of parallel shell and PowerShell implementations.
+
+For each detected agent the engine:
+
+1. copies each skill folder into the agent's skills folder and adds a `.aio-agent` marker file;
+2. writes the router, with `{{SKILLS_DIR}}` replaced by that folder, as a file or a marked block;
+3. merges the MCP servers from `core/mcp/servers.yaml` into the agent's config, or adds them through `claude mcp add-json` for Claude Code;
+4. records every file it changed, its backup and the SHA-256 of what it wrote in `~/.aio-agent/state.json`.
+
+A file is only written when its content would change, which makes a second run a no-op. Uninstall uses the recorded hash to tell whether the user edited a file after the install, and restores the backup only if they did not.
+
+## Adding a skill
+
+1. Create `core/skills/<group>/aio-<name>/SKILL.md` with `name` and `description` frontmatter. The description says what the skill does and when to use it.
+2. Add a trigger row and a catalog row to `core/rules/router.md`.
+3. Add the skill to [skills.md](skills.md), and its sources to [SOURCES.md](../SOURCES.md) and [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
+4. Run `scripts/check-skills.sh`.
+
+## Adding a platform
+
+1. Confirm the platform's user-level paths in its official documentation and add a section to [platforms.md](platforms.md).
+2. Create `adapters/<id>/adapter.conf`. The keys are:
+
+   | Key | Meaning |
+   | --- | --- |
+   | `NAME` | Display name |
+   | `DETECT_COMMANDS`, `DETECT_DIRS` | The agent counts as installed if a command is on `PATH` or a folder exists |
+   | `BASE`, `BASE_ENV` | The agent's home folder, and the variable that overrides it |
+   | `SKILLS_DIR` | Where skill folders go; `{BASE}` expands to the home folder |
+   | `RULES_MODE` | `file` (own file), `block` (marked block in a shared file) or `none` |
+   | `RULES_PATH`, `RULES_FRONTMATTER` | Rules location, and frontmatter to put before the router (`\n` for new lines) |
+   | `MCP_MODE` | `json`, `codex-toml`, `claude-cli` or `none` |
+   | `MCP_PATH`, `MCP_URL_KEY`, `MCP_TYPE_FIELD` | JSON config file, the key for a remote server's URL, and whether entries need a `type` |
+   | `MCP_ENV_STYLE` | How the agent expands variables: `dollar` (`${VAR}`), `cursor` (`${env:VAR}`), `codex`, or `none` |
+
+3. Add the id to the round-trip test and the CI `ADAPTERS` list, then run `node --test tests/roundtrip.test.mjs`.
