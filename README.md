@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/brand/banner-dark.png">
+  <img src="assets/brand/banner.png" alt="AIO-AGENT: one set of skills, rules and MCP servers for every coding agent" width="800">
+</picture>
+
 # AIO-AGENT
 
 [![CI](https://github.com/wmasday/AIO-AGENT/actions/workflows/ci.yml/badge.svg)](https://github.com/wmasday/AIO-AGENT/actions/workflows/ci.yml)

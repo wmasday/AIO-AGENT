@@ -68,3 +68,7 @@ The full license text is in [LICENSES/Apache-2.0.txt](LICENSES/Apache-2.0.txt). 
 | [anthropics/claude-plugins-official, `claude-code-setup`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup) | No NOTICE file | `aio-setup` |
 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | Its NOTICE.md covers the iOS and Android reference files, which AIO-AGENT does not use | `aio-frontend-design` |
 | [ChromeDevTools/chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp) | No NOTICE file | `aio-browser-debug` |
+
+## Fonts
+
+The wordmark, tagline and platform names in `assets/brand/` are set in Geist and Geist Mono by Vercel, licensed under the [SIL Open Font License 1.1](https://openfontlicense.org). The text is converted to outlines; no font files are distributed.
