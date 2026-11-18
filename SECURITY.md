@@ -13,4 +13,8 @@ Include the affected file or script, the platform and agent you used, steps to r
 
 ## Supported versions
 
-AIO-AGENT has no release yet. Fixes land on `main`.
+| Version | Supported |
+| --- | --- |
+| 0.1.x | Yes |
+
+Fixes land on `main` and in the next patch release.

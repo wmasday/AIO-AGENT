@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-First release candidate, planned as 0.1.0.
+## [0.1.0] - 2026-11-18
+
+First release. Pre-release quality: see Known limitations.
 
 ### Added
 
@@ -19,9 +21,13 @@ First release candidate, planned as 0.1.0.
 - Backups before every change to an existing file, and byte-for-byte restore on uninstall.
 - Opt-in `aio-pentest` skill for Shannon and Strix, gated by an explicit command and an authorization check.
 - Brand assets: logo, banner and social preview.
+- `aio-agent` command-line interface (`install`, `uninstall`, `update`, `doctor`, `list`) and npm packaging, so `npx aio-agent@latest install` works without a clone.
 
 ### Known limitations
 
 - Codex, Cursor, Kimi, Pi, Oh My Pi and OpenCode are tested at the config-file level only; the agents were not available on the test machine.
 - The Windows scripts and the Linux install have not run; they are covered by CI, which has not completed a run.
 - Cursor has no user-level rules file; the router must be pasted into its settings by hand.
+
+[Unreleased]: https://github.com/wmasday/AIO-AGENT/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/wmasday/AIO-AGENT/releases/tag/v0.1.0
