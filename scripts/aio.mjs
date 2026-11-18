@@ -426,7 +426,9 @@ async function reachable(server) {
 		} catch { return false; }
 	}
 	return new Promise((resolve) => {
-		const child = spawn(server.command, server.args.split(/\s+/), { stdio: ['pipe', 'pipe', 'ignore'], shell: IS_WINDOWS });
+		// Under `npx aio-agent`, inherited npm_config_* variables (package=...) would hijack the nested npx.
+		const env = Object.fromEntries(Object.entries(process.env).filter(([k]) => !k.toLowerCase().startsWith('npm_')));
+		const child = spawn(server.command, server.args.split(/\s+/), { stdio: ['pipe', 'pipe', 'ignore'], shell: IS_WINDOWS, env });
 		const done = (ok) => { clearTimeout(timer); child.kill(); resolve(ok); };
 		const timer = setTimeout(() => done(false), 120000);
 		let out = '';
@@ -488,7 +490,7 @@ const USAGE = `Usage: aio.mjs <install|uninstall|doctor|list> [--only id[,id...]
   list       Show adapters and whether each agent was detected.
   --only     Limit to these adapter ids, even if the agent is not detected.`;
 
-async function main(argv) {
+export async function main(argv) {
 	const [cmd, ...rest] = argv;
 	if (['-h', '--help', 'help'].includes(cmd) || rest.includes('--help') || rest.includes('-h')) { log(USAGE); return 0; }
 	const onlyAt = rest.indexOf('--only');
