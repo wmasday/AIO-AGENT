@@ -20,3 +20,6 @@ build/
 
 # Config backups written by the installer
 *.bak-*
+
+# npm pack output
+*.tgz

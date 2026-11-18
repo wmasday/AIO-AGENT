@@ -1,0 +1,40 @@
+{
+  "name": "aio-agent",
+  "version": "0.1.0",
+  "description": "Skills, rules and MCP server definitions installed once for every coding agent on your machine.",
+  "license": "MIT",
+  "author": "wmasday",
+  "keywords": ["ai-agents", "claude-code", "codex", "cursor", "mcp", "skills", "developer-tools"],
+  "bin": {
+    "aio-agent": "scripts/cli.js"
+  },
+  "files": [
+    "core",
+    "adapters",
+    "scripts",
+    "docs",
+    "README.md",
+    "LICENSE",
+    "LICENSES",
+    "THIRD_PARTY_NOTICES.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wmasday/AIO-AGENT.git"
+  },
+  "homepage": "https://github.com/wmasday/AIO-AGENT#readme",
+  "bugs": {
+    "url": "https://github.com/wmasday/AIO-AGENT/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --test tests/roundtrip.test.mjs",
+    "pack:check": "npm pack --dry-run"
+  }
+}
