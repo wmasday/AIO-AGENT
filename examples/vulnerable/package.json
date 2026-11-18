@@ -1,0 +1,12 @@
+{
+  "name": "aio-agent-example-vulnerable",
+  "private": true,
+  "description": "Intentionally vulnerable sample for the AIO-AGENT security demos. Binds to 127.0.0.1 only. Never expose it.",
+  "type": "module",
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning server.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}
