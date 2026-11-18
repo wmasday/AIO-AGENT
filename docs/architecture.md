@@ -54,7 +54,7 @@ The full per-source notes are in [SOURCES.md](../SOURCES.md) and the per-platfor
 | Upstream pentest skills trigger on "security scan" | Not installed. `aio-pentest` runs only on an explicit command. |
 | Anti-slop's design rules vs. impeccable's surface modes | Impeccable's modes decide the ambition level; anti-slop's warning signs apply in every mode. The brief overrides both. |
 
-`core/rules/precedence.md` will be the binding version of these rules.
+[core/rules/precedence.md](../core/rules/precedence.md) is the binding version of these rules.
 
 ### License matrix
 
