@@ -12,7 +12,7 @@
     "core",
     "adapters",
     "scripts",
-    "docs",
+    "docs/*.md",
     "README.md",
     "LICENSE",
     "LICENSES",
