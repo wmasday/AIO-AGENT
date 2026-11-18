@@ -43,7 +43,7 @@ Plain-language requests ("be brief", "just a quick prototype") switch modes too.
 | Choosing HTML, CSS or browser JavaScript APIs | `aio-modern-web` |
 | The user wants a ready-made UI component | `aio-ui-components` |
 | Debugging, profiling or inspecting a page in a browser | `aio-browser-debug` |
-| Code or questions that depend on a library's API | `aio-library-docs` |
+| A question about, or code using, a specific library, framework or SDK API (React, Next.js, Zod, Prisma and the like). Don't answer these from memory | `aio-library-docs` |
 | Reviewing code for security vulnerabilities | `aio-security-review` |
 | Setting up an agent, MCP servers or automations for a project | `aio-setup` |
 | Installing a third-party skill or plugin | `aio-skill-check` |

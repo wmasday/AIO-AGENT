@@ -1,6 +1,6 @@
 ---
 name: aio-library-docs
-description: Fetch current, version-specific documentation for a library, framework, SDK or API through the Context7 MCP server instead of relying on memory. Use when writing code against a library, answering setup or configuration questions, or when the user names a version.
+description: Fetch current, version-specific documentation through the Context7 MCP server before answering any question about a library, framework or SDK API, or writing code that uses one (React, Next.js, Zod, Prisma, Tailwind and the like). Use it instead of answering from memory, especially when the user names a version.
 ---
 
 # Library documentation through Context7
