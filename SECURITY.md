@@ -17,4 +17,8 @@ Include the affected file or script, the platform and agent you used, steps to r
 | --- | --- |
 | 0.1.x | Yes |
 
-Fixes land on `main` and in the next patch release.
+The latest release is listed on the [releases page](https://github.com/wmasday/AIO-AGENT/releases) and on [npm](https://www.npmjs.com/package/aio-agent). Fixes land on `main` and in the next patch release.
+
+## Intentionally vulnerable sample
+
+`examples/vulnerable/` contains a SQL injection and a reflected XSS on purpose, for the security review and pentest demos. It binds to 127.0.0.1 and is not part of the npm package. Reports about those two seeded flaws are not vulnerabilities in AIO-AGENT; anything else in that sample, such as it listening on another address, is.

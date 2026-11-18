@@ -1,6 +1,6 @@
 {
   "name": "aio-agent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Skills, rules and MCP server definitions installed once for every coding agent on your machine.",
   "license": "MIT",
   "author": "wmasday",
