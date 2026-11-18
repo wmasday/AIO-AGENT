@@ -5,7 +5,7 @@
 
 # AIO-AGENT
 
-[![CI](https://github.com/wmasday/AIO-AGENT/actions/workflows/ci.yml/badge.svg)](https://github.com/wmasday/AIO-AGENT/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/aio-agent)](https://www.npmjs.com/package/aio-agent)
 [![Release](https://img.shields.io/github/v/release/wmasday/AIO-AGENT)](https://github.com/wmasday/AIO-AGENT/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
@@ -91,10 +91,10 @@ Safety rules hold in every mode. See [core/rules/precedence.md](core/rules/prece
 | Cursor | paste by hand | yes | yes | Config files only, macOS; agent not run |
 | Kimi Code CLI | no global file | yes | yes, without keys | Config files only, macOS; agent not run |
 | Pi | yes | yes | yes | Config files only, macOS; agent not run |
-| Oh My Pi | yes | yes | yes, without keys | Config files only, macOS; agent not run |
+| Oh My Pi | yes | yes | yes | Config files only, macOS; agent not run |
 | OpenCode | yes | yes | no | Config files only, macOS; agent not run |
 
-"Config files only" means the installer, doctor and uninstaller were run against a scratch home directory and the files were checked against each vendor's documentation, but the agent itself was not available to confirm it loads them. Linux and Windows are covered by the CI workflow, which has not yet completed a run. Paths and caveats per agent: [docs/platforms.md](docs/platforms.md).
+"Config files only" means the installer, doctor and uninstaller were run against a scratch home directory and the files were checked against each vendor's documentation, but the agent itself was not available to confirm it loads them. Linux and Windows have not been tested yet. Paths and caveats per agent: [docs/platforms.md](docs/platforms.md).
 
 ## Update and uninstall
 
