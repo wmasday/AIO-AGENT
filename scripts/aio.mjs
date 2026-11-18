@@ -26,8 +26,6 @@ const warn = (msg) => console.log(`  ! ${msg}`);
 const sha = (text) => crypto.createHash('sha256').update(text).digest('hex');
 const tilde = (p) => (p.startsWith(HOME) ? `~${p.slice(HOME.length)}` : p);
 
-// ---------- inputs from core/ and adapters/
-
 function expandHome(p) {
 	return p.startsWith('~/') ? path.join(HOME, ...p.slice(2).split('/')) : p;
 }
@@ -85,8 +83,6 @@ export function loadServers(file = path.join(ROOT, 'core', 'mcp', 'servers.yaml'
 	return servers;
 }
 
-// ---------- detection
-
 function onPath(cmd) {
 	const exts = IS_WINDOWS ? ['.exe', '.cmd', '.bat', ''] : [''];
 	return (process.env.PATH || '').split(path.delimiter).filter(Boolean)
@@ -103,8 +99,6 @@ function selectAdapters(only) {
 	if (unknown.length) throw new Error(`unknown adapter: ${unknown.join(', ')}`);
 	return all.filter((a) => ids.includes(a.id));
 }
-
-// ---------- state, backups, file writes
 
 function loadState() {
 	if (!fs.existsSync(STATE_FILE)) return { version: 1, files: {}, skills: [], createdDirs: [], mcp: {}, claude: {} };
@@ -149,8 +143,6 @@ function writeManaged(file, content, state) {
 	return true;
 }
 
-// ---------- skills
-
 function treeDigest(dir) {
 	const parts = [];
 	const walk = (d, rel) => {
@@ -183,8 +175,6 @@ function installSkills(adapter, state) {
 	}
 	return changed;
 }
-
-// ---------- rules
 
 function routerText(adapter) {
 	return fs.readFileSync(path.join(ROOT, 'core', 'rules', 'router.md'), 'utf8')
@@ -219,8 +209,6 @@ function installRules(adapter, state) {
 	const current = fs.existsSync(adapter.rulesPath) ? fs.readFileSync(adapter.rulesPath, 'utf8') : '';
 	return writeManaged(adapter.rulesPath, appendBlock(current, MD_BEGIN, body, MD_END), state);
 }
-
-// ---------- MCP
 
 const envRef = (style, name) => (style === 'cursor' ? `\${env:${name}}` : `\${${name}}`);
 
@@ -357,8 +345,6 @@ function installMcp(adapter, state) {
 			: installJsonMcp(adapter, plan, state);
 	return { changed, skipped };
 }
-
-// ---------- commands
 
 function install(only) {
 	const adapters = selectAdapters(only);
