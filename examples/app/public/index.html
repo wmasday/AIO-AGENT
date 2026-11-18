@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deskline: sign up</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #ffffff; color: #222; }
+    main { max-width: 420px; margin: 64px auto; padding: 0 16px; }
+    h1 { font-size: 28px; margin-bottom: 4px; }
+    .lead { color: #b5b5b5; margin-top: 0; }
+    input, select { display: block; width: 100%; box-sizing: border-box; margin: 10px 0; padding: 10px; border: 1px solid #e6e6e6; font-size: 15px; }
+    input:focus, select:focus { outline: none; }
+    .button { background: #7fb3ff; color: #ffffff; padding: 12px; text-align: center; cursor: pointer; margin-top: 16px; }
+    #message { min-height: 1.5em; color: #c0392b; }
+    .stats { color: #b5b5b5; font-size: 13px; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Deskline</h1>
+    <p class="lead">Office supplies for small teams. Create your account.</p>
+    <form id="signup">
+      <input name="name" placeholder="Name">
+      <input name="email" placeholder="Email">
+      <select name="plan">
+        <option value="free">Free</option>
+        <option value="team">Team</option>
+      </select>
+      <div class="button" onclick="submitSignup()">Create account</div>
+      <p id="message"></p>
+    </form>
+    <p class="stats"><span id="signup-count">…</span> teams signed up this month.</p>
+  </main>
+  <script>
+    async function submitSignup() {
+      const form = document.getElementById('signup');
+      const body = Object.fromEntries(new FormData(form));
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      document.getElementById('message').textContent = data.ok ? 'Account created.' : data.errors.join(', ');
+    }
+
+    fetch('/api/stats')
+      .then((res) => res.json())
+      .then((stats) => {
+        document.getElementById('signupCount').textContent = stats.signups;
+      });
+  </script>
+</body>
+</html>

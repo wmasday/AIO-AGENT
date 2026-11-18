@@ -1,0 +1,16 @@
+{
+  "name": "aio-agent-example-app",
+  "private": true,
+  "description": "Sample app for the AIO-AGENT demos. It contains seeded flaws on purpose; see examples/README.md.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "zod": "4.6.7"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
