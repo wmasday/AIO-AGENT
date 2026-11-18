@@ -23,8 +23,8 @@ The agent must also see the variable when it starts. Desktop apps launched from 
 | Claude Code | `${VAR}` in the header, expanded at runtime |
 | Codex | `bearer_token_env_var` or `env_http_headers` in `config.toml` |
 | Cursor | `${env:VAR}` in the header |
-| Pi | `${VAR}` in the header |
-| Antigravity, Kimi, Oh My Pi | Not supported: Context7 is added without a key, Magic is skipped |
+| Pi, Oh My Pi | `${VAR}` in the header |
+| Antigravity, Kimi | Not supported: Context7 is added without a key, Magic is skipped |
 
 ## Agent home overrides
 
