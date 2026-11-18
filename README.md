@@ -11,7 +11,7 @@
 
 One set of skills, rules and MCP server definitions, installed once at user level for every coding agent on the machine.
 
-AIO-AGENT merges 17 open-source agent toolkits (workflow, TDD, debugging, frontend quality, security, terse output) into 20 skills with one job each, and installs them into Claude Code, Codex, Cursor, Antigravity, Kimi, Pi, Oh My Pi and OpenCode. An always-on router of under 100 lines decides when each skill loads, so skill bodies stay out of the context until they are needed.
+AIO-AGENT draws on 17 open-source agent skills and tools (workflow, TDD, debugging, frontend quality, security, terse output), merged into 20 skills with one job each, and installs them into Claude Code, Codex, Cursor, Antigravity, Kimi, Pi, Oh My Pi and OpenCode. An always-on router of under 100 lines decides when each skill loads, so skill bodies stay out of the context until they are needed.
 
 ## Quick start
 
@@ -25,7 +25,7 @@ AIO-AGENT/scripts/install.sh
 AIO-AGENT/scripts/doctor.sh
 ```
 
-Windows (PowerShell):
+Windows (PowerShell; not yet run on Windows, see [installation](docs/installation.md#windows)):
 
 ```powershell
 git clone https://github.com/wmasday/AIO-AGENT.git
@@ -76,8 +76,8 @@ Safety rules hold in every mode. See [core/rules/precedence.md](core/rules/prece
 
 | Agent | Rules | Skills | MCP | Tested |
 | --- | --- | --- | --- | --- |
-| Claude Code | yes | yes | yes | Install, doctor and MCP connection on macOS |
-| Google Antigravity | yes | yes | yes, without keys | Config files only, macOS |
+| Claude Code | yes | yes | yes | End to end on macOS: install, doctor, skill listing, workflow, Context7, DevTools and pentest-gate prompts |
+| Google Antigravity | yes | yes | yes, without keys | On macOS: install, doctor, and the agent lists all 20 skills; workflow prompts not run |
 | OpenAI Codex | yes | yes | yes | Config files only, macOS; agent not run |
 | Cursor | paste by hand | yes | yes | Config files only, macOS; agent not run |
 | Kimi Code CLI | no global file | yes | yes, without keys | Config files only, macOS; agent not run |
