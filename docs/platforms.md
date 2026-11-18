@@ -12,7 +12,7 @@ Where each agent reads user-level (global) rules, skills and MCP servers, and ho
 | Google Antigravity | `~/.gemini/config/rules/aio-agent.md` | `~/.gemini/config/skills/` | `~/.gemini/config/mcp_config.json` | `antigravity` |
 | Kimi Code CLI | none documented | `~/.kimi/skills/` | `~/.kimi/mcp.json` | `kimi` |
 | Pi | `~/.pi/agent/AGENTS.md` (managed block) | `~/.agents/skills/` | `~/.pi/agent/mcp.json` | `pi` |
-| Oh My Pi | `~/.omp/agent/AGENTS.md` (managed block) | `~/.agents/skills/` | `~/.omp/agent/mcp.json` | `pi` |
+| Oh My Pi | `~/.omp/agent/AGENTS.md` (managed block) | `~/.agents/skills/` | `~/.omp/agent/mcp.json` | `omp` |
 | OpenCode | `~/.config/opencode/AGENTS.md` (managed block) | `~/.agents/skills/` | not configured | `agents-md` |
 | AutoClaw | no documented global config | | | none |
 
@@ -65,7 +65,7 @@ Source: Pi [Configuration](https://github.com/earendil-works/pi/blob/main/packag
 - **Pi:** user configuration lives in `~/.pi/agent` (`PI_CODING_AGENT_DIR` moves it). Context files load from that directory, so `~/.pi/agent/AGENTS.md` is global. Skills load from `~/.agents/skills/`. MCP servers load from `~/.pi/agent/mcp.json`; `headers` values expand `${VAR}`.
 - **Oh My Pi** (`omp`), a Pi fork: user context in `~/.omp/agent/AGENTS.md`, skills from `~/.agents/skills/` (on by default), MCP in `~/.omp/agent/mcp.json`. It also reads other agents' files, including `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`, and drops a same-name skill whose body is identical. TODO(verify): whether `headers` in `mcp.json` expand `${VAR}`; until then AIO-AGENT adds no keyed servers for Oh My Pi.
 
-One adapter, `pi`, handles both: it configures whichever of `~/.pi/agent` and `~/.omp/agent` exists.
+The `pi` adapter configures Pi and the `omp` adapter configures Oh My Pi. Oh My Pi also reads `~/.codex/AGENTS.md`, so with Codex installed too it sees the router twice.
 
 ## OpenCode
 
